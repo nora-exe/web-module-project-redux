@@ -1,27 +1,48 @@
 # Redux React Module Project: Movie CRUD
-
-This module explored the redux philosophy, creation of the redux store and using connect to link state and action to arbitrary components.
-
-## Objectives
-- Understand the use and setup of Redux
-- Use Redux to connect existing state and actions to components
-- Use the combineReducer method to combine states.
-- Build reducers, actions and redux connections from scratch
-
 ## Introduction
+This module explores the redux philosophy, creation of the redux store and using connect to link state and action to arbitrary components.
+
 In this project, you take a fairly complex application used to search a movie database and connect it to two different reducers through redux. You will both connect existing state definitions and build entire reducer / redux pairings from scratch.
 
 ![Movie DB Example](project-goals.gif)
 
-***Make sure to complete your tasks one at a time and complete test each task before proceeding forward.***
+## Objectives
+- Understand the use and setup of Redux
+- Use Redux to connect existing state and actions to components
+- Use the `combineReducer` method to combine states.
+- Build reducers, actions and redux connections from scratch
 
-## Instructions
-### Task 1: Project Set Up
-* [ ] Create a forked copy of this project.
-* [ ] Clone your OWN version of the repository in your terminal
-* [ ] cd into the project base directory `cd web-module-project-redux`
-* [ ] Download project dependencies by running `npm install``
-* [ ] Start up the app using `npm start`
+# Notes
+* 🎥 [GP video](https://youtu.be/vKz12G9XpFI)
+* 🎥 [MP video](https://www.loom.com/share/dc97839acccf48339842c6265413fafb)
+## Key Concepts:
+* [Redux](https://react-redux.js.org/introduction/why-use-react-redux) - A framework used to create and mantain a reducer pattern
+## Key Terminology:
+* [default arguments](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters) - A means to set what value a javascript function argument should be when it is not defined.
+* [function currying](https://www.youtube.com/watch?v=oU3LzOO0OGA) - Functions that return other functions
+* [the connect function](https://react-redux.js.org/api/connect) - A react-redux method that allows for components to be connect to state and dispatch through props.
+```javascript
+function connect(mapStateToProps?, mapDispatchToProps?, mergeProps?, options?)
+```
+If a `mapStateToProps` function is specified, the new wrapper component will subscribe to Redux store updates - any time the store is updated, `mapStateToProps` will be called. The results of `mapStateToProps` must be a plain object, which will be merged into the wrapped component’s props. If you don't want to subscribe to store updates, pass `null` or `undefined` in place of `mapStateToProps`.
+* [combine reducers](https://redux.js.org/api/combinereducers/) - A redux method that allows several different reducers used in one application
+* [mapStateToProps](https://react-redux.js.org/7.1/using-react-redux/connect-mapstate#mapstatetoprops-will-not-run-if-the-store-state-is-the-same) - A programmer generated function that gets the application state and connects it to a components props
+
+If your `mapStateToProps` function is declared as taking one parameter, it will be called whenever the store state changes, and given the store state as the only parameter.
+
+```javascript
+const mapStateToProps = (state) => ({ todos: state.todos })
+```
+* [ownProps](https://react-redux.js.org/api/connect#ownprops) - If your `mapStateToProps` function is declared as taking two parameters, it will be called whenever the store state changes or when the wrapper component receives new props (based on shallow equality comparisons). It will be given the store state as the first parameter, and the wrapper component's props as the second parameter.
+
+```javascript
+const mapStateToProps = (state, ownProps) => ({
+  todo: state.todos[ownProps.id],
+})
+```
+
+## Walkthrough
+***Make sure to complete your tasks one at a time and complete test each task before proceeding forward.***
 
 ### Task 2: Project Requirements
 #### Setup Redux
@@ -83,7 +104,8 @@ In this project, you take a fairly complex application used to search a movie da
   - removeFavorite: Removes a movie Object from the favorites list with an id passed in.
 
 ### Stretch goals
-- It makes sense to not allow the user to favorite an item if favorites is not displayed. Add in means for the favorite button to ONLY display if displayFavorite is true.
+- ✅ It makes sense to not allow the user to favorite an item if favorites is not displayed. Add in means for the favorite button to ONLY display if displayFavorite is true.
 - Right now, you can favorite the same movie multiple times. Change the addFavorite action to only add in a new favorite if it doesn't already exist.
 - Add in the ability to remove a movie from the favorites list if that movie is removed from our main movie list.
 - Style to your heart's content ❤️
+
